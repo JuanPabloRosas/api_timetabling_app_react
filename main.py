@@ -18,7 +18,7 @@ app.add_middleware(
 )
 
 # ------------------ Función de timetabling ------------------
-def solve_timetabling(data):
+def solve_timetabling(data,capacidad_empleado, costo_perdida, jornada_laboral):
 
     columnas_empleados = ["employee", "cost_hour"]
     datos_empleados = [
@@ -196,8 +196,9 @@ def solve_timetabling(data):
 
     client_dem = {(int(r['hora']), int(r['dia'])): int(r['afluencia']) for _, r in demand_df.iterrows()}
 
-    capacidad = 10
-    lam = 10000
+    capacidad = capacidad_empleado
+    lam = costo_perdida
+    jornada = jornada_laboral
     w = {s: len(work_hours[s]) for s in SHIFTS}
 
     # Configuración de licencia Gurobi
@@ -228,7 +229,7 @@ def solve_timetabling(data):
             model.addConstr(cap + u[h, d] >= client_dem.get((h, d), 0), name=f'cov_{h}_{d}')
 
     for e in EMPLOYEES:
-        model.addConstr(gp.quicksum(x[e, s, d] * w[s] for s in SHIFTS for d in DAYS) == 48, name=f'week_hours_{e}')
+        model.addConstr(gp.quicksum(x[e, s, d] * w[s] for s in SHIFTS for d in DAYS) == jornada, name=f'week_hours_{e}')
         for d in DAYS:
             model.addConstr(gp.quicksum(x[e, s, d] for s in SHIFTS) <= 1, name=f'one_shift_{e}_{d}')
         model.addConstr(gp.quicksum(x[e, s, d] for s in SHIFTS for d in DAYS) <= 6, name=f'max_days_{e}')
