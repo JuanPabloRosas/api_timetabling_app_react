@@ -19,11 +19,9 @@ app.add_middleware(
 
 # ------------------ Función de timetabling ------------------
 def solve_timetabling(data):
-
-    df_json = data.json()
-    capacidad_empleado = df_json['capacidad']
-    costo_perdida = df_json['costoPerdida']
-    jornada_laboral = df_json['jornada']
+    capacidad_empleado = data['capacidad_atencion']
+    costo_perdida = data['costo_perdida']
+    jornada_laboral = data['jornada_laboral']
 
     columnas_empleados = ["employee", "cost_hour"]
     datos_empleados = [
