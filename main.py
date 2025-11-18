@@ -265,7 +265,7 @@ def solve_timetabling(data):
             'Costo': t_cost[empleado]
         })
 
-    return {"timetable": gantt_rows}
+    return {"timetable": gantt_rows, "costo_total": model.objVal}
 
 # ------------------ Endpoint FastAPI ------------------
 @app.post("/solve")
