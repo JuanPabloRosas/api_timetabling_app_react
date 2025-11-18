@@ -22,7 +22,7 @@ def solve_timetabling(data):
 
     df_json = data.json()
     capacidad_empleado = df_json['capacidad']
-    costo_perdida = df_json['costo']
+    costo_perdida = df_json['costoPerdida']
     jornada_laboral = df_json['jornada']
 
     columnas_empleados = ["employee", "cost_hour"]
