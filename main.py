@@ -228,7 +228,7 @@ def solve_timetabling(data):
     # Restricciones
     for d in DAYS:
         for h in HOURS:
-            cap = gp.quicksum(x[e, s, d] * capacidad for e in EMPLOYEES for s in SHIFTS if h in work_hours[s])
+            cap = gp.quicksum(x[e, s, d] * capacidad * w[s] for e in EMPLOYEES for s in SHIFTS if h in work_hours[s])
             model.addConstr(cap + u[h, d] >= client_dem.get((h, d), 0), name=f'cov_{h}_{d}')
 
     for e in EMPLOYEES:
