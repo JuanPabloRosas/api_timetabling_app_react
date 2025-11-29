@@ -29,6 +29,18 @@ def solve_timetabling(data):
         ["Luis", 100],
         ["Sara", 110],
         ["Pedro", 105],
+        ["Juan", 120],
+        ["Javier", 100],
+        ["Laura", 110],
+        ["Rosy", 105],
+        ["Leo", 120],
+        ["Ignacio", 100],
+        ["Karen", 110],
+        ["Marifer", 105],
+        ["Ciro", 120],
+        ["Olga", 100],
+        ["Telma", 110],
+        ["José", 105],
     ]
 
     columnas_turnos = ["turno", "inicio", "fin", "comida", "nocturno"]
